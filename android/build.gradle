@@ -1,9 +1,24 @@
+buildscript {
+    ext.kotlin_version = '1.7.10' // Utilize a mesma versão mencionada no erro
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.3.0" // Certifique-se de usar a mesma versão no app build.gradle
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+
+
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
 }
+
 
 rootProject.buildDir = "../build"
 subprojects {

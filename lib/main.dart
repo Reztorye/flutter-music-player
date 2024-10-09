@@ -155,10 +155,14 @@ class NowPlayingPageState extends State<NowPlayingPage> {
   void initState() {
     super.initState();
     _audioPlayer = AudioPlayer();
-    _audioPlayer.play(widget.musicUrl);
-    isPlaying = true;
-    super.initState();
-    _audioPlayer = AudioPlayer();
+    _playMusic();
+  }
+
+  void _playMusic() async {
+    await _audioPlayer.play(UrlSource(widget.musicUrl));
+    setState(() {
+      isPlaying = true;
+    });
   }
 
   @override
@@ -167,11 +171,11 @@ class NowPlayingPageState extends State<NowPlayingPage> {
     super.dispose();
   }
 
-  void _playPauseMusic() {
+  void _playPauseMusic() async {
     if (isPlaying) {
-      _audioPlayer.pause();
+      await _audioPlayer.pause();
     } else {
-      _audioPlayer.play(widget.musicUrl);
+      await _audioPlayer.play(UrlSource(widget.musicUrl));
     }
     setState(() {
       isPlaying = !isPlaying;
